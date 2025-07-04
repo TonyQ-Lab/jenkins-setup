@@ -1,0 +1,22 @@
+controller:
+  admin:
+    username: admin
+    password: changeme
+  nodeSelector: { jenkins: "yes" }
+  serviceType: NodePort
+  nodePort: 30080
+  resources:
+    requests:
+      cpu: "500m"
+      memory: "2Gi"
+    limits:
+      cpu: "1"
+      memory: "4Gi"
+
+persistence:
+  storageClass: jenkins-pv
+
+serviceAccount:
+  create: false
+  name: jenkins
+  annotations: {}
