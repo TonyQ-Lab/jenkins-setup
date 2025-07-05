@@ -3,22 +3,27 @@ multibranchPipelineJob('webserver-job') {
 
     branchSources {
         github {
-\           repository('tonyq2k3/webserver-cicd')
-            credentialsId('tonyq2k3') // Ensure you have this credential set up in Jenkins
+            id('webserver-cicd-github')
             scanCredentialsId('tonyq2k3')
+            repoOwner('Tonyq2k3')
+            repository('webserver-cicd')
+            buildOriginPRHead(true)
+            buildForkPRHead(true)
         }
     }
 
-    triggers {
-        scm('H/5 * * * *') // Poll SCM every 5 minutes
-    }
+    configure { project -> 
+        def triggers = project / 'triggers'
+        triggers << 'com.igalg.jenkins.plugins.mswt.trigger.ComputedFolderWebHookTrigger' {
+            spec('')
+            token('tony')
+        }
 
-    steps {
-        shell('echo Hello from Job DSL!')
-        shell('echo Building project...')
-    }
-
-    publishers {
-        mailer('you@example.com', false, true)
+        def branchSource = project / 'sources' / 'data' / 'jenkins.branch.BranchSource'
+        def strategies = branchSource / 'buildStrategies'
+        strategies << 'com.igalg.jenkins.plugins.multibranch.buildstrategy.ExcludeRegionByFieldBranchBuildStrategy' {
+            strategy('EXCLUDED')
+            excludedRegions('**/*.md .gitignore .dockerignore **/*.jpeg **/*.png **/*.jpg Jenkinsfile Dockerfile **/*.yaml')
+        }
     }
 }
