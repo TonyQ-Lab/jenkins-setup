@@ -12,11 +12,6 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - /usr/local/bin/docker:/usr/local/bin/docker
     restart: unless-stopped
-  
-  # trivy:
-  #   image: aquasec/trivy:0.64.1
-  #   container_name: trivy
-
 
 
 volumes:
