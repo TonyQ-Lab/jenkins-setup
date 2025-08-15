@@ -4,6 +4,8 @@
 # Install Jenkins but through WAR file #
 ########################################
 
+set -euxo pipefail
+
 # Jenkins WAR file URL (Change based on your version)
 JENKINS_WAR_URL="https://get.jenkins.io/war-stable/2.346.3/jenkins.war"
 
