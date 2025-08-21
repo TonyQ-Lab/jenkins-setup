@@ -12,7 +12,7 @@ variable "vpc_name" {
 
 variable "vpc_subnet" {
   type = object({
-    name = string
+    name       = string
     cidr_block = string
   })
   description = "Subnet to create in the VPC"

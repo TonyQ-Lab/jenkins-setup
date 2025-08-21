@@ -9,3 +9,9 @@ variable "security_group_ids" {
   type        = list(string)
   default     = []
 }
+
+variable "instance_name" {
+  description = "The name tag for the EC2 instance"
+  type        = string
+  default     = "my-server"
+}

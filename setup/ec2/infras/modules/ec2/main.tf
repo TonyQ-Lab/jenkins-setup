@@ -8,6 +8,14 @@ resource "aws_instance" "server" {
     volume_size = 12
   }
   tags = {
-    Name = "Jenkins Server"
+    Name = var.instance_name
+  }
+}
+
+resource "aws_eip" "server_eip" {
+  depends_on = [aws_instance.server]
+  instance   = aws_instance.server.id
+  tags = {
+    Name = "${var.instance_name}-eip"
   }
 }
