@@ -15,3 +15,15 @@ variable "instance_name" {
   type        = string
   default     = "my-server"
 }
+
+variable "instance_type" {
+  description = "EC2 instance type"
+  type = string
+  default = "t3.small"
+}
+
+variable "instance_size" {
+  description = "Root volume size of the EC2 instance"
+  type        = number
+  default     = 12
+}

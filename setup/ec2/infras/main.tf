@@ -31,6 +31,7 @@ module "sonarqube-server" {
   source             = "./modules/ec2"
   subnet_id          = module.vpc.subnet_id
   security_group_ids = [module.vpc.public_sg_id]
+  instance_type      = "t3.medium"
   instance_name      = "sonarqube-server"
 }
 
