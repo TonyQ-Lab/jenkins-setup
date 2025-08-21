@@ -45,3 +45,24 @@ stage('SonarQube Analysis') {
     }
 }
 ```
+
+Adding Quality Gate
+===================
+
+1. Go to **Project Settings** > **Webhooks**
+
+2. Click **Create**
+    + Name: jenkins
+    + URL: `http://<jenkins-url>/sonarqube-webhook/`
+
+3. Add Quality Gate to Jenkins job:
+
+```groovy
+stage("Quality Gate") {
+    steps {
+        timeout(time: 1, unit: 'HOURS') {
+            waitForQualityGate abortPipeline: true
+        }
+    }
+}
+```
